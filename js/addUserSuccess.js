@@ -1,0 +1,1 @@
+prompt('Votre inscription est validée !');

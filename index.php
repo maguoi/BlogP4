@@ -15,8 +15,7 @@ try {
 					throw new Exception("Ce chapitre n'existe pas");				
 				}
 			}
-			elseif($_GET['action'] == 'listChapters') {
-				
+			elseif($_GET['action'] == 'listChapters') {				
 				listChaptersBack();
 			}
 			elseif ($_GET['action'] == 'logOut') {
@@ -100,6 +99,10 @@ try {
 					else {
 						listChaptersBack();
 					}
+				}
+				elseif ($_GET['action'] == 'eraseUser') {
+					eraseUser();
+					editUsers();
 				}
 			}	
 		}

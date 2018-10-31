@@ -1,9 +1,9 @@
 <?php $title =  'Bienvenue, ' . $_SESSION['login'] . '!' ; ?>
 
 <?php ob_start(); ?>
-<h1>Billet simple pour l'Alaska </h1>
-<h2> Un roman de Jean Forteroche </h2>
-<p> Liste des chapitres </p>
+<h1 class="text-white">Billet simple pour l'Alaska </h1>
+<h2 class="text-white"> Un roman de Jean Forteroche </h2>
+<p class="text-white"> Liste des chapitres </p>
 
 <?php
 while ($data = $chapters->fetch())
@@ -12,23 +12,32 @@ while ($data = $chapters->fetch())
 	<div class="p-2 w-50 m-auto table table-dark ">
 		<h3>
 			<?= htmlspecialchars($data['title']) ?>
-			<em>posté le <?= $data['creation_date'] ?></em>			
+			<br/>
+			<em class="font-weight-light h5">posté le <?= $data['creation_date'] ?></em>			
 		</h3>
-		<?php
-		if ($_SESSION['group'] == 2) {
-			?>
-			<p><a href="index.php?action=toEditChapter&amp;id=<?= $data['id'] ?>"> éditer le chapitre </a></p>
-		<?php
-		}
-		else{}
-		?>
-		
 		<p>
-			<?= $data['content'] ?>
+			<?php
+			$content = $data['content'];
+			$nbMax = 400;
+			if (strlen($content)>= $nbMax) {
+				$content = substr($content, 0, $nbMax). '...';
+				echo $content;
+			}
+			else{
+				echo $data['content'];
+			}
+			 ?>
 			
-			<p>
+			<p class="d-flex justify-content-center">
 				<br />
-				<em><a href="index.php?action=chapter&amp;id=<?= $data['id'] ?>">Commentaires</a></em>
+				<a class="btn btn-info mx-4" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>">Commentaires (<?= $data['nb_coms'] ?>)</a>
+				<?php
+				if ($_SESSION['group'] == 2) {
+				?>			
+					<a class="btn btn-info mx-4" href="index.php?action=toEditChapter&amp;id=<?= $data['id'] ?>"> Éditer le chapitre </a>
+				<?php
+				}
+				?>
 			</p>		
 		</p>
 	</div>

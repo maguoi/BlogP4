@@ -20,7 +20,7 @@
 			<input type="password" class="password" name="password"></input>
 		</div>
 		<div>
-			<input class="m-5" type="submit">
+			<input class="m-5 btn btn-success" type="submit">
 		</div>
 	</form>
 </div>

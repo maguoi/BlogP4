@@ -48,5 +48,20 @@ class UserManager extends Manager
 
 		return $moveUser;
 	}
+	public function eraseUser($login)
+	{
+		$db = $this->dbConnect();
+		$eraseUser = $db->prepare('DELETE FROM user WHERE login = :login');
+		$eraseUser->execute(array('login' => $login));
+
+		return $eraseUser;
+	}
+	public function countUsers()
+	{
+		$db = $this->dbConnect();
+		$countUsers = $db->query('SELECT id, COUNT(id) AS count_users FROM user');
+
+		return $countUsers;
+	}
 
 }

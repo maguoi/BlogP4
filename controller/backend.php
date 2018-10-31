@@ -10,7 +10,11 @@ function homeAdmin()
 	$chapterManager = new ChapterManager();
 	$chapters = $chapterManager->getChapters();
 	$chapterManager = new ChapterManager();
-	$ulChapters = $chapterManager->getChapters();
+	$ulChapters = $chapterManager->getHeaderChapters();
+	$commentManager = new CommentManager();
+	$countReportComments = $commentManager->countReportComments();
+	$userManager = new UserManager();
+	$countUsers = $userManager->countUsers();
 
 	require('view/backend/liChaptersTemplate.php');
 	require('view/backend/successLogin.php');
@@ -21,10 +25,16 @@ function listChaptersBack()
 	$chapterManager = new ChapterManager();
 	$chapters = $chapterManager->getChapters();
 	$chapterManager = new ChapterManager();
-	$ulChapters = $chapterManager->getChapters();
+	$ulChapters = $chapterManager->getHeaderChapters();
+	$commentManager = new CommentManager();
+	$countReportComments = $commentManager->countReportComments();
+	$userManager = new UserManager();
+	$countUsers = $userManager->countUsers();
+
 
 	require('view/backend/liChaptersTemplate.php');
 	require('view/backend/listChaptersView.php');
+
 
 	
 }
@@ -38,7 +48,11 @@ function chapterBack()
 	$comments = $commentManager->getComments($_GET['id']);
 
 	$chapterManager = new ChapterManager();
-	$ulChapters = $chapterManager->getChapters();
+	$ulChapters = $chapterManager->getHeaderChapters();
+	$commentManager = new CommentManager();
+	$countReportComments = $commentManager->countReportComments();
+	$userManager = new UserManager();
+	$countUsers = $userManager->countUsers();
 
 	require('view/backend/liChaptersTemplate.php');
 	require('view/backend/chapterView.php');
@@ -69,7 +83,11 @@ function addChapter($title, $content)
 function controlChapter()
 {
 	$chapterManager = new ChapterManager();
-	$ulChapters = $chapterManager->getChapters();
+	$ulChapters = $chapterManager->getHeaderChapters();
+	$commentManager = new CommentManager();
+	$countReportComments = $commentManager->countReportComments();
+	$userManager = new UserManager();
+	$countUsers = $userManager->countUsers();
 
 	require('view/backend/liChaptersTemplate.php');
 	require('view/backend/addChapter.php');
@@ -84,7 +102,11 @@ function getUser($login)
 
 	$isPasswordCorrect = password_verify($_POST['password'], $result['password']);
 	if (!$result) {
+		$chapterManager = new ChapterManager();
+		$ulChapters = $chapterManager->getHeaderChapters();
 		echo "Erreur d'authentification ";
+		require('view/frontend/liChaptersTemplate.php');
+		require('view/frontend/loginUser.php');
 	}
 	else {
 		if ($isPasswordCorrect) {
@@ -97,7 +119,13 @@ function getUser($login)
 			
 		}
 		else {
-			echo "Erreur d'authentification ";
+			
+		$chapterManager = new ChapterManager();
+		$ulChapters = $chapterManager->getHeaderChapters();
+		echo "Erreur d'authentification ";
+		require('view/frontend/liChaptersTemplate.php');
+		require('view/frontend/loginUser.php');
+
 		}
 	}
 }
@@ -112,7 +140,11 @@ function listReportComments()
 	$commentManager = new CommentManager();
 	$reportComments = $commentManager->getReportComments();
 	$chapterManager = new ChapterManager();
-	$ulChapters = $chapterManager->getChapters();
+	$ulChapters = $chapterManager->getHeaderChapters();
+	$commentManager = new CommentManager();
+	$countReportComments = $commentManager->countReportComments();
+	$userManager = new UserManager();
+	$countUsers = $userManager->countUsers();
 
 	require('view/backend/liChaptersTemplate.php');
 	require('view/backend/editComments.php');
@@ -141,7 +173,11 @@ function toEditChapter()
 	$chapterManager = new ChapterManager();
 	$toEditChapter = $chapterManager->toEditChapter($_GET['id']);
 	$chapterManager = new ChapterManager();
-	$ulChapters = $chapterManager->getChapters();
+	$ulChapters = $chapterManager->getHeaderChapters();
+	$commentManager = new CommentManager();
+	$countReportComments = $commentManager->countReportComments();
+	$userManager = new UserManager();
+	$countUsers = $userManager->countUsers();
 
 	require('view/backend/liChaptersTemplate.php');
 	require('view/backend/editChapter.php');
@@ -164,7 +200,11 @@ function editUsers()
 	$userManager = new UserManager();
 	$usersList = $userManager->getUsers();
 	$chapterManager = new ChapterManager();
-	$ulChapters = $chapterManager->getChapters();
+	$ulChapters = $chapterManager->getHeaderChapters();
+	$commentManager = new CommentManager();
+	$countReportComments = $commentManager->countReportComments();
+	$userManager = new UserManager();
+	$countUsers = $userManager->countUsers();
 
 	require('view/backend/liChaptersTemplate.php');
 	require('view/backend/editUsers.php');
@@ -185,4 +225,11 @@ function moveUser2()
 
 	echo "<p class='fixed-top position-relative text-success'> changement effectué ! </p>";
 
+}
+function eraseUser()
+{
+	$userManager = new UserManager();
+	$eraseUser = $userManager->eraseUser($_POST['login']);
+
+	echo "<p class='fixed-top position-relative text-success'> membre supprimé ! </p>";
 }

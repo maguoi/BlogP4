@@ -6,7 +6,7 @@ class Manager
 {
 	protected function dbConnect()
 	{
-		$db = new PDO('mysql:host=localhost;dbname=forteroche;charset=utf8', 'root', '');
+		$db = new PDO('mysql:host=db759389311.hosting-data.io;dbname=db759389311;charset=utf8', 'dbo759389311', '?18Hugues');
 		return $db;
 	}
 }

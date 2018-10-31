@@ -3,22 +3,22 @@
 <?php ob_start(); ?>
 
 
-<h1> Interface d'administration </h1>
-<h2> Bonjour, Jean Forteroche </h2>
-<p><a href="index.php?action=listChapters"> Retour au menu précédent </a></p>
+<h1 class="text-white"> Interface d'administration </h1>
+<h2 class="text-white"> Bonjour, Jean Forteroche </h2>
+<p><a class="btn btn-info" href="index.php?action=listChapters"> Retour au menu précédent </a></p>
 
 <form action="index.php?action=addChapter" method="post" id="tinyPost">
 	<div>
-		<label for="title">Titre</label>
+		<label class="text-white" for="title">Titre</label>
 		<br />
 		<input type="text" id="title" name="title">
 	</div>
 	<div>
-		<label for="content"> Contenu du chapitre </label><br />
+		<label class="text-white" for="content"> Contenu du chapitre </label><br />
 		<textarea id="content" name="content"></textarea>
 	</div>
 	<div>
-		<input type="submit">
+		<input class="btn btn-success m-2" type="submit">
 	</div>
 </form>
 

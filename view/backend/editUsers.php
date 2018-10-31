@@ -2,16 +2,17 @@
 
 <?php ob_start(); ?>
 
-<h1> Espace de gestion de membres</h1>
-<p><a href="index.php?action=listChapters"> Retour au menu précédent </a></p>
+<h1 class="text-white"> Espace de gestion de membres</h1>
+<p><a class="btn btn-info" href="index.php?action=listChapters"> Retour au menu précédent </a></p>
 
 
 <table class="table table-dark w-50 m-auto">
 	<thead>
 		<th class="text-center" scope="col"> Login </th>
-		<th class="text-center" scope="col"> membre 1 / admin 2 </th>
-		<th class="text-center" scope="col"> adresse E-mail </th>
-		<th class="text-center" scope="col"> administrer </th>
+		<th class="text-center" scope="col"> Membre 1 / Admin 2 </th>
+		<th class="text-center" scope="col"> Adresse E-mail </th>
+		<th class="text-center" scope="col"> Administrer </th>
+		<th class="text-center" scope="col"> Effacer </th>
 	</thead>
 	<tbody class="p-2">
 	<?php
@@ -29,8 +30,13 @@
 					<option value="membre"> membre </option>
 					<option value="admin"> admin </option>
 				</select>
-				<input class="" type="submit" name="submit">
+				<input class="mx-2 btn btn-success" type="submit" name="submit">
 			</form></td>
+			<td><form class="d-flex justify-content-center" method="post" action="index.php?action=eraseUser">
+				<?php echo '<input type="hidden" class="login" id="login" name="login" value="' . $data["login"] . '">'; ?>
+				<input class="btn btn-danger" type="submit" name="Effacer" value="Effacer">
+			</form></td>
+
 		</tr>
 	<?php
 	}

@@ -10,16 +10,27 @@ while ($data = $chapters->fetch())
 {
 ?>
 	<div class="p-2 w-50 m-auto table table-active ">
-		<h3>
+		<h3 class="chapterTitle">
 			<?= htmlspecialchars($data['title']) ?>
-			<em>le <?= $data['creation_date'] ?></em>			
+			<br/>
+			<em class="font-weight-light h5">posté le <?= $data['creation_date'] ?></em>			
 		</h3>
 		<p>
-			<?= $data['content'] ?>
+			<?php
+			$content = $data['content'];
+			$nbMax = 400;
+			if (strlen($content)>= $nbMax) {
+				$content = substr($content, 0, $nbMax). '...';
+				echo $content;
+			}
+			else{
+				echo $data['content'];
+			}
+			?>
 			
 			<p>
 				<br />
-				<em><a href="index.php?action=chapter&amp;id=<?= $data['id'] ?>">Commentaires</a></em>
+				<em><a class="btn btn-warning" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>">Commentaires (<?= $data['nb_coms'] ?>)</a></em>
 			</p>		
 		</p>
 	</div>

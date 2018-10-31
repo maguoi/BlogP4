@@ -10,7 +10,10 @@ function listChapters()
 {
 	$chapterManager = new ChapterManager();
 	$chapters = $chapterManager->getChapters();
+	$chapterManager = new ChapterManager();
+	$ulChapters = $chapterManager->getHeaderChapters();
 
+	require('view/frontend/liChaptersTemplate.php');
 	require('view/frontend/listChaptersView.php');
 	
 }
@@ -18,26 +21,27 @@ function logOut()
 {
 	$chapterManager = new ChapterManager();
 	$chapters = $chapterManager->getChapters();
+	$chapterManager = new ChapterManager();
+	$ulChapters = $chapterManager->getHeaderChapters();
 	session_destroy();
+
+	require('view/frontend/liChaptersTemplate.php');
 	require('view/frontend/logOut.php');
 	
 }
-function  chaptersHeader()
-{
-	$chapterManagerHeader = new ChapterManager();
-	$chaptersBis = $chapterManagerHeader->getHeaderChapters();
 
-	require('view/frontend/chapterListHeader.php');
-}
 
 function chapter()
 {
 	$chapterManager = new ChapterManager();
 	$commentManager = new CommentManager();
+	$chapterManager = new ChapterManager();
+	$ulChapters = $chapterManager->getHeaderChapters();
 
 	$chapter = $chapterManager->getChapter($_GET['id']);
 	$comments = $commentManager->getComments($_GET['id']);
 
+	require('view/frontend/liChaptersTemplate.php');
 	require('view/frontend/chapterView.php');
 }
 
@@ -58,11 +62,19 @@ function addUser($login, $password, $mail)
 
 function connexionArea()
 {
+	$chapterManager = new ChapterManager();
+	$ulChapters = $chapterManager->getHeaderChapters();
+
+	require('view/frontend/liChaptersTemplate.php');
 	require('view/frontend/loginUser.php');
 }
 
 function successRegistration()
 {
+	$chapterManager = new ChapterManager();
+	$ulChapters = $chapterManager->getHeaderChapters();
+
+	require('view/frontend/liChaptersTemplate.php');
 	require('view/frontend/successRegistration.php');
 }
 

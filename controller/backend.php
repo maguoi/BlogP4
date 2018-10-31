@@ -4,11 +4,13 @@ require_once('model/ChapterManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
 
-
-function homeAdmin()
+ 
+function homeAdmin($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
-	$chapters = $chapterManager->getChapters();
+	$nombreDePages = $chapterManager->paginationChapters();
+	$chapterManager = new ChapterManager();
+	$chapters = $chapterManager->getChapters($pageActuelle);
 	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 	$commentManager = new CommentManager();
@@ -16,14 +18,22 @@ function homeAdmin()
 	$userManager = new UserManager();
 	$countUsers = $userManager->countUsers();
 
-	require('view/backend/liChaptersTemplate.php');
-	require('view/backend/successLogin.php');
+	if ($pageActuelle>$nombreDePages || $pageActuelle<= 0) {
+			listChaptersBack(1);
+		}
+	else 
+	{
+		require('view/backend/liChaptersTemplate.php');
+		require('view/backend/listChaptersView.php');
+	}
 }
 
-function listChaptersBack()
+function listChaptersBack($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
-	$chapters = $chapterManager->getChapters();
+	$nombreDePages = $chapterManager->paginationChapters();
+	$chapterManager = new ChapterManager();
+	$chapters = $chapterManager->getChapters($pageActuelle);
 	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 	$commentManager = new CommentManager();
@@ -32,11 +42,14 @@ function listChaptersBack()
 	$countUsers = $userManager->countUsers();
 
 
-	require('view/backend/liChaptersTemplate.php');
-	require('view/backend/listChaptersView.php');
-
-
-	
+	if ($pageActuelle>$nombreDePages || $pageActuelle<= 0) {
+			listChaptersBack(1);
+		}
+	else 
+	{
+		require('view/backend/liChaptersTemplate.php');
+		require('view/backend/listChaptersView.php');
+	}	
 }
 
 function chapterBack()
@@ -115,7 +128,7 @@ function getUser($login)
 			$_SESSION['login'] = $login;
 			$_SESSION['group'] = $result['id_groupe'];
 			echo "<p class='fixed-top position-relative text-success'> Connexion réussie ! </p>";
-			homeAdmin();
+			homeAdmin(1);
 			
 		}
 		else {

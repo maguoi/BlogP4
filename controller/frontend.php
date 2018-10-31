@@ -6,27 +6,43 @@ require_once('model/UserManager.php');
 
 // functions about chapters
 
-function listChapters()
+function listChapters($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
-	$chapters = $chapterManager->getChapters();
+	$nombreDePages = $chapterManager->paginationChapters();
+	$chapterManager = new ChapterManager();
+	$chapters = $chapterManager->getChapters($pageActuelle);
 	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 
-	require('view/frontend/liChaptersTemplate.php');
-	require('view/frontend/listChaptersView.php');
+	if ($pageActuelle>$nombreDePages || $pageActuelle<= 0) {
+		listChapters(1);
+	}
+	else 
+	{
+		require('view/frontend/liChaptersTemplate.php');
+		require('view/frontend/listChaptersView.php');
+	}
 	
 }
-function logOut()
+function logOut($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
-	$chapters = $chapterManager->getChapters();
+	$nombreDePages = $chapterManager->paginationChapters();
+	$chapterManager = new ChapterManager();
+	$chapters = $chapterManager->getChapters($pageActuelle);
 	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 	session_destroy();
 
-	require('view/frontend/liChaptersTemplate.php');
-	require('view/frontend/logOut.php');
+	if ($pageActuelle>$nombreDePages || $pageActuelle<= 0) {
+		listChapters(1);
+	}
+	else 
+	{
+		require('view/frontend/liChaptersTemplate.php');
+		require('view/frontend/logOut.php');
+	}
 	
 }
 

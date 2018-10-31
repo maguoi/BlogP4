@@ -44,6 +44,19 @@ while ($data = $chapters->fetch())
 <?php
 }
 $chapters->closeCursor();
+echo '<p align="center">Page : ';
+for($i=1; $i<=$nombreDePages; $i++)
+{
+	if($i ==$pageActuelle)
+	{
+		echo ' [ '.$i.' ] ';
+	}
+	else
+	{
+		echo ' <a href="index.php?action=listChapters&page='.$i.'">'.$i.'</a> ';
+	}
+}
+echo '</p>';
 ?>
 <?php $content = ob_get_clean(); ?>
 

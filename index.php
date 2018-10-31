@@ -16,21 +16,27 @@ try {
 				}
 			}
 			elseif($_GET['action'] == 'listChapters') {				
-				listChaptersBack();
+				if (isset($_GET['page'])) {
+					$pageActuelle = intval($_GET['page']);
+					listChaptersBack($pageActuelle);
+				}
+				else{
+					listChaptersBack(1);	
+				}
 			}
 			elseif ($_GET['action'] == 'logOut') {
-				logOut();
+				logOut(1);
 			}
 			elseif ($_GET['action'] == 'reportComment') {
 				reportComment();
 				echo "<p class='fixed-top position-relative text-success'> Commentaire signalé ! </p>";
-				listChaptersBack();
+				listChaptersBack(1);
 			}
 			elseif ($_GET['action'] == 'loginQuestion') {
-				listChaptersBack();
+				listChaptersBack(1);
 			}
 			elseif ($_GET['action'] == 'connexionArea') {
-				listChaptersBack();
+				listChaptersBack(1);
 			}
 			elseif ($_GET['action'] == 'addComment') {
 				if(isset($_GET['id']) && $_GET['id'] > 0) {
@@ -63,11 +69,11 @@ try {
 				}
 				elseif($_GET['action'] == 'editChapter') {
 					editChapter();
-					listChaptersBack();
+					listChaptersBack(1);
 				}
 				elseif ($_GET['action'] == 'eraseChapter') {
 					eraseChapter();
-					listChaptersBack();
+					listChaptersBack(1);
 				}
 				elseif ($_GET['action'] == 'editComments') {
 					listReportComments();
@@ -97,7 +103,7 @@ try {
 						editUsers();
 					}
 					else {
-						listChaptersBack();
+						listChaptersBack(1);
 					}
 				}
 				elseif ($_GET['action'] == 'eraseUser') {
@@ -108,7 +114,13 @@ try {
 		}
 		else { // espace non-membre	
 			if ($_GET['action'] == 'listChapters') {
-				listChapters();		
+				if (isset($_GET['page'])) {
+					$pageActuelle = intval($_GET['page']);
+					listChapters($pageActuelle);
+				}
+				else{
+					listChapters(1);	
+				}	
 			}
 			elseif ($_GET['action'] == 'connexionArea') {
 				connexionArea();
@@ -152,12 +164,18 @@ try {
 				controlChapter();
 			}
 			elseif ($_GET['action'] == 'logOut') {
-				logOut();
+				logOut(1);
 			}
 		}
 	}	
 	else {
-		listChapters();
+		if (isset($_GET['page'])) {
+			$pageActuelle = intval($_GET['page']);
+			listChapters($pageActuelle);
+		}
+		else{
+			listChapters(1);	
+		}
 	}
 }
 catch (Exception $e) {

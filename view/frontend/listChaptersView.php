@@ -28,9 +28,10 @@ while ($data = $chapters->fetch())
 			} 
 			?>
 			
-			<p>
+			<p class="d-flex justify-content-center">
 				<br />
-				<em ><a class="btn btn-warning text-dark" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>">Commentaires (<?= $data['nb_coms'] ?>)</a></em>
+				<a class="btn btn-warning text-dark mx-4" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>">Lire le chapitre</a>
+				<a class="btn btn-warning text-dark mx-4" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>#comments">Commentaires (<?= $data['nb_coms'] ?>)</a>
 			</p>		
 		</p>
 	</div>

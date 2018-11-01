@@ -30,11 +30,12 @@ while ($data = $chapters->fetch())
 			
 			<p class="d-flex justify-content-center">
 				<br />
-				<a class="btn btn-info mx-4" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>">Commentaires (<?= $data['nb_coms'] ?>)</a>
+				<a class="btn btn-info mx-2" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>">Lire le chapitre</a>
+				<a class="btn btn-info mx-2" href="index.php?action=chapter&amp;id=<?= $data['id'] ?>#comments">Commentaires (<?= $data['nb_coms'] ?>)</a>
 				<?php
 				if ($_SESSION['group'] == 2) {
 				?>
-					<a class="btn btn-info mx-4" href="index.php?action=toEditChapter&amp;id=<?= $data['id'] ?>"> éditer le chapitre </a>
+					<a class="btn btn-info mx-2" href="index.php?action=toEditChapter&amp;id=<?= $data['id'] ?>"> éditer le chapitre </a>
 				<?php
 				}
 				else{}

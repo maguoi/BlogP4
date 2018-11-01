@@ -6,13 +6,17 @@ require_once("model/Manager.php");
 
 class CommentManager extends Manager
 {
-	public function getComments($chapterId)
+	public function getComments($pageActuelle, $chapterId)
 	{
+		$commentairesParPage=5;
+		$premiereEntree=($pageActuelle-1)*$commentairesParPage;
 		$db = $this->dbConnect();
-		$comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, GET_FORMAT(DATE, "EUR")) AS comment_date, comment_state_id FROM comments WHERE chapter_id = ? AND comment_state_id = 1 ORDER BY comment_date DESC');
+		$comments = $db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, GET_FORMAT(DATE, "EUR")) AS comment_date, comment_state_id FROM comments WHERE chapter_id = ? AND comment_state_id = 1 ORDER BY comment_date DESC LIMIT '.$premiereEntree.', '.$commentairesParPage.'');
 		$comments->execute(array($chapterId));
 
 		return $comments;
+
+		
 	}
 
 	public function postComment($chapterId, $author, $comment)
@@ -22,6 +26,8 @@ class CommentManager extends Manager
 		$affectedLines = $comments->execute(array($chapterId, $author, $comment));
 
 		return $affectedLines;
+
+		
 	}
 
 	public function getComment($commentId)
@@ -32,6 +38,8 @@ class CommentManager extends Manager
 		$comment = $req->fetch();
 
 		return $comment;
+
+		
 	}
 	public function getReportComments()
 	{
@@ -72,6 +80,22 @@ class CommentManager extends Manager
 		$countReportComments = $db->query('SELECT id, COUNT(id) AS count_coms FROM comments WHERE comment_state_id = 2');
 
 		return $countReportComments;
+	}
+	public function paginationCommentaires($chapterId)
+	{
+		$commentairesParPage = 5;
+
+
+		$db = $this->dbConnect();
+		$retour_total = $db->prepare('SELECT id  AS total FROM comments WHERE chapter_id = ? AND comment_state_id = 1');
+		$retour_total->execute(array($chapterId));
+		$total = $retour_total->rowCount();
+
+		$nombreDePages = ceil($total/$commentairesParPage);
+		
+		return $nombreDePages;
+
+
 	}
 
 }

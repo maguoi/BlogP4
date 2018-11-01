@@ -9,9 +9,7 @@ function homeAdmin($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
 	$nombreDePages = $chapterManager->paginationChapters();
-	$chapterManager = new ChapterManager();
 	$chapters = $chapterManager->getChapters($pageActuelle);
-	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 	$commentManager = new CommentManager();
 	$countReportComments = $commentManager->countReportComments();
@@ -32,9 +30,7 @@ function listChaptersBack($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
 	$nombreDePages = $chapterManager->paginationChapters();
-	$chapterManager = new ChapterManager();
 	$chapters = $chapterManager->getChapters($pageActuelle);
-	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 	$commentManager = new CommentManager();
 	$countReportComments = $commentManager->countReportComments();
@@ -52,23 +48,22 @@ function listChaptersBack($pageActuelle)
 	}	
 }
 
-function chapterBack()
+function chapterBack($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
 	$commentManager = new CommentManager();
-
-	$chapter = $chapterManager->getChapter($_GET['id']);
-	$comments = $commentManager->getComments($_GET['id']);
-
-	$chapterManager = new ChapterManager();
-	$ulChapters = $chapterManager->getHeaderChapters();
-	$commentManager = new CommentManager();
-	$countReportComments = $commentManager->countReportComments();
 	$userManager = new UserManager();
+	$nombreDePages = $commentManager->paginationCommentaires($_GET['id']);
+	$chapter = $chapterManager->getChapter($_GET['id']);
+	$comments = $commentManager->getComments($pageActuelle, $_GET['id']);
+	$ulChapters = $chapterManager->getHeaderChapters();
+	$countReportComments = $commentManager->countReportComments();
 	$countUsers = $userManager->countUsers();
 
 	require('view/backend/liChaptersTemplate.php');
 	require('view/backend/chapterView.php');
+
+
 }
 
 /* ---------------- */
@@ -154,7 +149,6 @@ function listReportComments()
 	$reportComments = $commentManager->getReportComments();
 	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
-	$commentManager = new CommentManager();
 	$countReportComments = $commentManager->countReportComments();
 	$userManager = new UserManager();
 	$countUsers = $userManager->countUsers();
@@ -185,7 +179,6 @@ function toEditChapter()
 {
 	$chapterManager = new ChapterManager();
 	$toEditChapter = $chapterManager->toEditChapter($_GET['id']);
-	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 	$commentManager = new CommentManager();
 	$countReportComments = $commentManager->countReportComments();
@@ -216,7 +209,6 @@ function editUsers()
 	$ulChapters = $chapterManager->getHeaderChapters();
 	$commentManager = new CommentManager();
 	$countReportComments = $commentManager->countReportComments();
-	$userManager = new UserManager();
 	$countUsers = $userManager->countUsers();
 
 	require('view/backend/liChaptersTemplate.php');

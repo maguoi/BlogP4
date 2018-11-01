@@ -9,7 +9,13 @@ try {
 			// espace membre
 			if ($_GET['action'] == 'chapter') {
 				if (isset($_GET['id']) && $_GET['id'] > 0) {
-					chapterBack();
+					if (isset($_GET['page'])) {
+						$pageActuelle = intval($_GET['page']);
+						chapterBack($pageActuelle);
+					}
+					else{
+						chapterBack(1);	
+					}
 				}
 				else {
 					throw new Exception("Ce chapitre n'existe pas");				
@@ -127,7 +133,13 @@ try {
 			}
 			elseif ($_GET['action'] == 'chapter') {
 				if (isset($_GET['id']) && $_GET['id'] > 0) {
-					chapter();
+					if (isset($_GET['page'])) {
+						$pageActuelle = intval($_GET['page']);
+						chapter($pageActuelle);
+					}
+					else{
+						chapter(1);	
+					}
 				}
 				else {
 					throw new Exception("Ce chapitre n'existe pas");				

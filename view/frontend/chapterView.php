@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="w-50 p-2 table table-secondary">
-		<h4 class="w-50 p-2 m-auto border border-secondary"> Espace commentaires </h4>
+		<h4 class="w-50 p-2 m-auto border border-secondary" id="comments"> Espace commentaires </h4>
 		<br/>
 		<div class="">
 		<?php 
@@ -61,6 +61,21 @@
 			</div>
 		<?php	
 		}
+		$comments->closeCursor();
+		echo '<p align="center">Page : ';
+		for($i=1; $i<=$nombreDePages; $i++)
+		{
+			if($i ==$pageActuelle)
+			{
+				echo ' [ '.$i.' ] ';
+			}
+			else
+			{
+				echo ' <a href="index.php?action=chapter&id='.$chapter['id'].'&page='.$i.'#comments">'.$i.'</a> ';
+			}
+		}
+		echo '</p>';
+
 		?>
 		<p>Pour signaler un commentaire, merci de bien vouloir vous enregistrer</p>
 		</div>

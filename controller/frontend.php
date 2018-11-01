@@ -10,9 +10,7 @@ function listChapters($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
 	$nombreDePages = $chapterManager->paginationChapters();
-	$chapterManager = new ChapterManager();
 	$chapters = $chapterManager->getChapters($pageActuelle);
-	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 
 	if ($pageActuelle>$nombreDePages || $pageActuelle<= 0) {
@@ -29,9 +27,7 @@ function logOut($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
 	$nombreDePages = $chapterManager->paginationChapters();
-	$chapterManager = new ChapterManager();
 	$chapters = $chapterManager->getChapters($pageActuelle);
-	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
 	session_destroy();
 
@@ -47,18 +43,18 @@ function logOut($pageActuelle)
 }
 
 
-function chapter()
+function chapter($pageActuelle)
 {
 	$chapterManager = new ChapterManager();
 	$commentManager = new CommentManager();
-	$chapterManager = new ChapterManager();
 	$ulChapters = $chapterManager->getHeaderChapters();
-
+	$nombreDePages = $commentManager->paginationCommentaires($_GET['id']);
 	$chapter = $chapterManager->getChapter($_GET['id']);
-	$comments = $commentManager->getComments($_GET['id']);
+	$comments = $commentManager->getComments($pageActuelle, $_GET['id']);
 
 	require('view/frontend/liChaptersTemplate.php');
 	require('view/frontend/chapterView.php');
+	
 }
 
 // functions about users
